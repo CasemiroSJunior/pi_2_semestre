@@ -164,6 +164,7 @@ require_once 'components/accordion.php';
 
   <main class="container">
     <div class="text-center">
+      <!-- CRIAR MANEIRA DE VERIFICAR SE FOR CELULAR PARA RENDERIZAR EM 100% E SE FOR DESKTOP EM 60% -->
       <img class="rounded" src="./assets/Banner.svg" style="width: 60%;" alt="...">
     </div>
 
