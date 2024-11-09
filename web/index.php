@@ -2,7 +2,7 @@
 require_once 'components/accordion.php';
 ?>
 <!doctype html>
-<html lang="en" data-bs-theme="auto">
+<html lang="pt-br" data-bs-theme="auto">
 
 <head>
   <script src="../assets/js/color-modes.js"></script>
