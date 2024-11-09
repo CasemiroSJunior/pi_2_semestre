@@ -99,6 +99,18 @@ require_once 'components/accordion.php';
     .bd-mode-toggle .dropdown-menu .active .bi {
       display: block !important;
     }
+
+    @media (max-width: 767px) {
+      .deviceSelector {
+        width: 80%;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .deviceSelector {
+        width: 100%;
+      }
+    }
   </style>
 
 
@@ -164,8 +176,8 @@ require_once 'components/accordion.php';
 
   <main class="container">
     <div class="text-center">
-      <!-- CRIAR MANEIRA DE VERIFICAR SE FOR CELULAR PARA RENDERIZAR EM 100% E SE FOR DESKTOP EM 60% -->
-      <img class="rounded" src="./assets/Banner.svg" style="width: 60%;" alt="...">
+
+      <img class="rounded deviceSelector" src="./assets/Banner.svg" alt="...">
     </div>
 
     <div class="row mb-2">
@@ -177,25 +189,25 @@ require_once 'components/accordion.php';
         <h3 class="pb-4 mb-4 fst-italic border-bottom">
           Produtos
         </h3>
-          <?php
-          for ($i = 1; $i <= 5; $i++) {
-              createAccordionCategory( "Categoria $i", [
-                  ["name" => "Produto 1", "description" => "Descrição do produto 1", "price" => 100],
-                  ["name" => "Produto 2", "description" => "Descrição do produto 2", "price" => 200],
-                  ["name" => "Produto 3", "description" => "Descrição do produto 3", "price" => 300],
-                  ["name" => "Produto 1", "description" => "Descrição do produto 1", "price" => 100],
-                  ["name" => "Produto 2", "description" => "Descrição do produto 2", "price" => 200],
-                  ["name" => "Produto 3", "description" => "Descrição do produto 3", "price" => 300],
-              ], $i);
-          }
-          ?>
+        <?php
+        for ($i = 1; $i <= 5; $i++) {
+          createAccordionCategory("Categoria $i", [
+            ["name" => "Produto 1", "description" => "Descrição do produto 1", "price" => 100],
+            ["name" => "Produto 2", "description" => "Descrição do produto 2", "price" => 200],
+            ["name" => "Produto 3", "description" => "Descrição do produto 3", "price" => 300],
+            ["name" => "Produto 1", "description" => "Descrição do produto 1", "price" => 100],
+            ["name" => "Produto 2", "description" => "Descrição do produto 2", "price" => 200],
+            ["name" => "Produto 3", "description" => "Descrição do produto 3", "price" => 300],
+          ], $i);
+        }
+        ?>
       </div>
     </div>
     </div>
   </main>
 
   <footer class="py-5 text-center text-body-secondary bg-body-tertiary">
-    <p>Produzido para um  <a href="https://github.com/casemirosjunior/pi_2_semestre/">PROJETO ESCOLAR</a>.</p>
+    <p>Produzido para um <a href="https://github.com/casemirosjunior/pi_2_semestre/">PROJETO ESCOLAR</a>.</p>
     <p class="mb-0">
       <a href="#">Voltar ao início</a>
     </p>
