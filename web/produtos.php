@@ -1,6 +1,6 @@
 
 <?php
-$content = 'produtos_content.php';
+$content = 'produtosContent.php';
 include './components/layout.php';
 ?>
 
