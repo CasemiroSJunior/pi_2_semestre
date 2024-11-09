@@ -5,6 +5,6 @@ include './components/layout.php';
 ?>
 
 <div class="container">
-    <h2>Gerenciamento de Produtos</h2>
-    <p>Conteúdo relacionado aos produtos.</p>
+    <h2>Gerenciamento de Ingredientes</h2>
+    <p>Conteúdo relacionado aos Ingredientes.</p>
 </div>
