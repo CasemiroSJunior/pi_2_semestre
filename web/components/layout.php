@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    <div id="mobileNav" class="mobileNav">
+    <div class="mobileNav">
         <div>
             <div>
                 <div>
