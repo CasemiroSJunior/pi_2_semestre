@@ -5,30 +5,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Venda</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="./css/sidebar.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid desktopNav">
         <div class="row">
-            <!-- Inclui a barra lateral -->
-            <?php include './components/sidebar.php'; ?>
+            <div class="col-md-2">
+                <?php include './components/sidebarDesktop.php'; ?>
+            </div>
 
-            <!-- Conteúdo principal -->
-            <div class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-       
-
-                <!-- Área central de conteúdo -->
+            <div class="col-md-10">
                 <main role="main" class="pt-3">
                     <?php include $content; ?>
                 </main>
             </div>
         </div>
     </div>
+    <div id="mobileNav" class="mobileNav">
+        <div>
+            <div>
+                <div>
+                    <?php include './components/sidebarMobile.php'; ?>
+                </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                <div>
+                    <main role="main" class="pt-3">
+                        <?php include $content; ?>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
