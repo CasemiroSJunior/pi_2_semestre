@@ -39,7 +39,7 @@
     <div class="container-fluid">
         <div class="row ">
             <div class="col-md-12 image-section" >
-                <img src="./assets/DALL_E-2024-11-09-18.20-removebg-preview.png" class="img-fluid "  alt="Imagem de Fundo">
+                <img src="./assets/Logo.png" class="img-fluid "  alt="Imagem de Fundo">
             </div>
             <div class="col-md-12 d-flex align-items-center justify-content-center">
                 <div class="login-form">
