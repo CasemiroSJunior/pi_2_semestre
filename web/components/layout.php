@@ -16,11 +16,11 @@
 <body>
     <div class="container-fluid desktopNav">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <?php include './components/sidebarDesktop.php'; ?>
             </div>
 
-            <div class="col-md-10">
+            <div class="col-md-9">
                 <main role="main" class="pt-3">
                     <?php include $content; ?>
                 </main>
@@ -30,7 +30,7 @@
     <div class="mobileNav">
         <div>
             <div>
-                <div>
+                <div class="p-2">
                     <?php include './components/sidebarMobile.php'; ?>
                 </div>
 
