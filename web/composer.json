@@ -1,0 +1,17 @@
+{
+    "name": "junin/config",
+    "autoload": {
+        "psr-4": {
+            "Junin\\Config\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Casemiro Seneme Junior",
+            "email": "casemiro.seneme@fatec.sp.gov.br"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
