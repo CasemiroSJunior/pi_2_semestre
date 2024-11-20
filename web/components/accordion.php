@@ -18,8 +18,8 @@ function createAccordionCategory($category, $children, $categoryId){
                 echo '<div class="col-md-4">
                         <div class="card mb-4">
                             <div class="card-body">
-                                <h5 class="card-title">'.$child['name'].'</h5>
-                                <p class="card-text">'.$child['description']. "R$ " .$child['price'].'</p>
+                                <h5 class="card-title">'.$child['NOME'].'</h5>
+                                <p class="card-text">'.$child['DESCRICAO'] . '<br>' . " R$ " .$child['PRECO'].'</p>
                                 <a href="#" class="btn btn-primary">Adicionar ao carrinho</a>
                             </div>
                         </div>

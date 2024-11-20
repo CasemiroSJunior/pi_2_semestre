@@ -1,3 +1,18 @@
+<?php
+//Importando classes que serao utilizadas
+require_once './classes/conexaoBanco.php';
+require_once './classes/autenticacao.php';
+
+//Definindo o método de requisicao
+if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+{
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $autenticacao = new autenticacaoLogin();
+    $autenticacao->verificaLogin($username, $password);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -44,7 +59,7 @@
             <div class="col-md-12 d-flex align-items-center justify-content-center">
                 <div class="login-form">
                     <h2>Login</h2>
-                    <form action="process_login.php" method="POST">
+                    <form action="" method="POST">
                         <div class="form-group">
                             <label for="username">Usuário</label>
                             <input type="text" name="username" id="username" class="form-control" required>
