@@ -1,5 +1,6 @@
 <?php
 require_once 'components/accordion.php';
+require_once './classes/produto.php';
 ?>
 <!doctype html>
 <html lang="pt-br" data-bs-theme="auto">
@@ -187,17 +188,24 @@ require_once 'components/accordion.php';
           Produtos
         </h3>
         <?php
-        for ($i = 1; $i <= 5; $i++) {
-          createAccordionCategory("Categoria $i", [
-            ["name" => "Produto 1", "description" => "Descrição do produto 1", "price" => 100],
-            ["name" => "Produto 2", "description" => "Descrição do produto 2", "price" => 200],
-            ["name" => "Produto 3", "description" => "Descrição do produto 3", "price" => 300],
-            ["name" => "Produto 1", "description" => "Descrição do produto 1", "price" => 100],
-            ["name" => "Produto 2", "description" => "Descrição do produto 2", "price" => 200],
-            ["name" => "Produto 3", "description" => "Descrição do produto 3", "price" => 300],
-          ], $i);
-        }
-        ?>
+          //Instanciando classe produto.
+          $produto = new Produto();
+          //Chamando o método obter categoria e reservando no categorias.
+          $categorias = $produto->obterCategoria();
+          //Percorre o array categorias, onde cada item pertence a uma categoria da base de dados.
+          //Index guarda a posição do item dentro do array.
+          //Categoria armazena cada elemento de categorias, representando uma categoria especifica.
+          foreach ($categorias as $index => $categoria) 
+          {
+            //Agora categoria e um array associativo e ID_CATEGORIA é a chave que armazena o identificador unico de cada categoria.
+            $categoriaId = $categoria['ID_CATEGORIA'];
+            //Chama o método que obtem o produto de acordo com a categoria passada.
+            $produtos = $produto->obterProdutoPorCategoria($categoriaId);
+            //Chama a função responsavel por mostrar na página os itens separados por categoria.
+            //Index + 1 é pra não startar a partir de 0
+            createAccordionCategory($categoria['NOME'], $produtos, $index + 1);
+          }
+          ?>
       </div>
     </div>
     </div>
