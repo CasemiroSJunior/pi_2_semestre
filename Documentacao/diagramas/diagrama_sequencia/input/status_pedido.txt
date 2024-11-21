@@ -1,0 +1,14 @@
+@startuml
+actor Cliente
+
+== Visualizar Status do Pedido ==
+Cliente -> Sistema : Solicitar status do pedido
+Sistema -> BancoDeDados : Consultar status do pedido
+alt Pedido encontrado
+    BancoDeDados --> Sistema : Retorna status do pedido
+    Sistema --> Cliente : Exibir status do pedido
+else
+    BancoDeDados --> Sistema : Erro: Pedido não encontrado
+    Sistema --> Cliente : Pedido não encontrado
+end
+@enduml

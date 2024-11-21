@@ -1,0 +1,27 @@
+@startuml
+actor ADM
+
+== Cadastrar Ingrediente ==
+ADM -> Sistema : Inserir dados do ingrediente
+Sistema -> BancoDeDados : Salvar ingrediente
+BancoDeDados --> Sistema : Confirmação de cadastro
+Sistema --> ADM : Ingrediente cadastrado com sucesso
+
+== Mostrar Ingrediente ==
+ADM -> Sistema : Solicitar lista de ingredientes
+Sistema -> BancoDeDados : Buscar lista de ingredientes
+BancoDeDados --> Sistema : Retorna lista de ingredientes
+Sistema --> ADM : Exibir lista de ingredientes
+
+== Atualizar Ingrediente ==
+ADM -> Sistema : Informar dados do ingrediente atualizado
+Sistema -> BancoDeDados : Atualizar ingrediente
+BancoDeDados --> Sistema : Confirmação de atualização
+Sistema --> ADM : Ingrediente atualizado com sucesso
+
+== Remover Ingrediente ==
+ADM -> Sistema : Solicitar remoção do ingrediente
+Sistema -> BancoDeDados : Remover ingrediente
+BancoDeDados --> Sistema : Confirmação de remoção
+Sistema --> ADM : Ingrediente removido com sucesso
+@enduml

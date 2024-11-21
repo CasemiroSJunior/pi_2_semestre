@@ -1,0 +1,12 @@
+@startuml
+actor Cliente
+
+== Finalizar Carrinho e Enviar Pedido ==
+
+Cliente -> Sistema : Finalizar carrinho
+Sistema -> BancoDeDados : Salvar pedido no banco
+BancoDeDados --> Sistema : Confirmação de pedido salvo
+Sistema -> WhatsApp : Enviar pedido para WhatsApp
+WhatsApp --> Sistema : Confirmação de envio
+Sistema --> Cliente : Confirmação de envio do pedido
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+actor Cliente
+
+== Editar Pedido ==
+
+Cliente -> Sistema : Solicitar edição do pedido (alterar produto, forma de pagamento ou cancelar)
+alt Alterar Produto
+    Sistema -> BancoDeDados : Atualizar produto no pedido
+    BancoDeDados --> Sistema : Confirmação de produto alterado
+    Sistema --> Cliente : Produto alterado com sucesso
+else Alterar Forma de Pagamento
+    Sistema -> BancoDeDados : Atualizar forma de pagamento
+    BancoDeDados --> Sistema : Confirmação de pagamento alterado
+    Sistema --> Cliente : Forma de pagamento alterada com sucesso
+else Cancelar Pedido
+    Sistema -> BancoDeDados : Cancelar pedido
+    BancoDeDados --> Sistema : Confirmação de cancelamento
+    Sistema --> Cliente : Pedido cancelado com sucesso
+end
+@enduml

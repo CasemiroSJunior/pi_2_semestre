@@ -1,0 +1,27 @@
+@startuml
+actor ADM
+
+== Cadastrar Funcionario ==
+ADM -> Sistema : Inserir dados do Funcionario
+Sistema -> BancoDeDados : Salvar Funcionario
+BancoDeDados --> Sistema : Confirmação de cadastro
+Sistema --> ADM : Funcionario cadastrado com sucesso
+
+== Mostrar Funcionario ==
+ADM -> Sistema : Solicitar lista de Funcionarios
+Sistema -> BancoDeDados : Buscar lista de Funcionarios
+BancoDeDados --> Sistema : Retorna lista de Funcionarios
+Sistema --> ADM : Exibir lista de Funcionarios
+
+== Atualizar Funcionario ==
+ADM -> Sistema : Informar dados do Funcionario atualizado
+Sistema -> BancoDeDados : Atualizar Funcionario
+BancoDeDados --> Sistema : Confirmação de atualização
+Sistema --> ADM : Funcionario atualizado com sucesso
+
+== Remover Funcionario ==
+ADM -> Sistema : Solicitar remoção do Funcionario
+Sistema -> BancoDeDados : Remover Funcionario
+BancoDeDados --> Sistema : Confirmação de remoção
+Sistema --> ADM : Funcionario removido com sucesso
+@enduml
