@@ -1,0 +1,10 @@
+@startuml
+actor Cliente
+
+== Escolher Método de Pagamento ==
+
+Cliente -> Sistema : Escolher método de pagamento
+Sistema -> BancoDeDados : Salvar forma de pagamento escolhida junto ao pedido
+BancoDeDados --> Sistema : Confirmação de forma de pagamento salva
+Sistema --> Cliente : Forma de pagamento registrada com sucesso
+@enduml

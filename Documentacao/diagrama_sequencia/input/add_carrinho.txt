@@ -1,0 +1,11 @@
+@startuml
+actor Cliente
+Cliente -> Sistema : Selecionar produto
+Sistema -> BancoDeDados : Consultar disponibilidade do produto
+BancoDeDados --> Sistema : Produto disponível/Indisponível
+alt Produto disponível
+    Sistema --> Cliente : Produto adicionado ao carrinho
+else
+    Sistema --> Cliente : Produto indisponível
+end
+@enduml

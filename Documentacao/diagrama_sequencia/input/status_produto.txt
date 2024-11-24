@@ -1,0 +1,27 @@
+@startuml
+actor ADM
+
+== Cadastrar Produto ==
+ADM -> Sistema : Inserir dados do Produto
+Sistema -> BancoDeDados : Salvar Produto
+BancoDeDados --> Sistema : Confirmação de cadastro
+Sistema --> ADM : Produto cadastrado com sucesso
+
+== Mostrar Produto ==
+ADM -> Sistema : Solicitar lista de Produtos
+Sistema -> BancoDeDados : Buscar lista de Produtos
+BancoDeDados --> Sistema : Retorna lista de Produtos
+Sistema --> ADM : Exibir lista de Produtos
+
+== Atualizar Produto ==
+ADM -> Sistema : Informar dados do Produto atualizado
+Sistema -> BancoDeDados : Atualizar Produto
+BancoDeDados --> Sistema : Confirmação de atualização
+Sistema --> ADM : Produto atualizado com sucesso
+
+== Remover Produto ==
+ADM -> Sistema : Solicitar remoção do Produto
+Sistema -> BancoDeDados : Remover Produto
+BancoDeDados --> Sistema : Confirmação de remoção
+Sistema --> ADM : Produto removido com sucesso
+@enduml
