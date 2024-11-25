@@ -19,7 +19,7 @@ class Produto
     public function obterCategoria()
     {
         // Preparando a consulta da categoria
-        $sql = "SELECT id_categoria, nome FROM categoria";
+        $sql = "SELECT ID_CATEGORIA, NOME FROM CATEGORIA";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->execute();
 
@@ -30,7 +30,7 @@ class Produto
     //Método que retorna os produtos por categoria
     public function obterProdutoPorCategoria($categoriaId) 
     {
-        $sql = "SELECT nome, descricao, preco FROM produto WHERE id_categoria = :categoriaId";
+        $sql = "SELECT NOME, DESCRICAO, PRECO FROM PRODUTO WHERE ID_CATEGORIA = :categoriaId";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':categoriaId', $categoriaId); 
         $stmt->execute();

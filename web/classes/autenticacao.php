@@ -19,7 +19,7 @@ class autenticacaoLogin
     public function login($username, $password)
     {
         //Criando consulta no banco de dados responsavel por pegar a senha de acordo com o usuario passado no forms.
-        $sql = "SELECT senha FROM usuario WHERE usuario = :username";
+        $sql = "SELECT Senha FROM Usuario WHERE Usuario = :username";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':username', $username);
 

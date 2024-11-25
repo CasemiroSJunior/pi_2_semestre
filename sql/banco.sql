@@ -69,15 +69,15 @@ DELIMITER ;
 --
 
 CREATE TABLE `categoria` (
-  `id_categoria` int(11) NOT NULL,
-  `nome` varchar(50) NOT NULL
+  `Id_Categoria` int(11) NOT NULL,
+  `Nome` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `categoria`
 --
 
-INSERT INTO `categoria` (`id_categoria`, `nome`) VALUES
+INSERT INTO `categoria` (`Id_Categoria`, `Nome`) VALUES
 (3, 'Bebidas'),
 (4, 'Doces'),
 (2, 'Pizza Doce'),
@@ -91,17 +91,17 @@ INSERT INTO `categoria` (`id_categoria`, `nome`) VALUES
 --
 
 CREATE TABLE `entregador` (
-  `id_entregador` int(11) NOT NULL,
-  `nome` varchar(100) NOT NULL,
-  `telefone` varchar(20) DEFAULT NULL,
-  `dataCriacao` date DEFAULT curdate()
+  `Id_entregador` int(11) NOT NULL,
+  `Nome` varchar(100) NOT NULL,
+  `Telefone` varchar(20) DEFAULT NULL,
+  `DataCriacao` date DEFAULT curdate()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `entregador`
 --
 
-INSERT INTO `entregador` (`id_entregador`, `nome`, `telefone`, `dataCriacao`) VALUES
+INSERT INTO `entregador` (`Id_entregador`, `Nome`, `Telefone`, `DataCriacao`) VALUES
 (1, 'João Silva', '11987654321', '2024-11-05'),
 (2, 'Maria Oliveira', '11987651234', '2024-11-05'),
 (3, 'Carlos Souza', '11987659876', '2024-11-05'),
@@ -115,17 +115,17 @@ INSERT INTO `entregador` (`id_entregador`, `nome`, `telefone`, `dataCriacao`) VA
 --
 
 CREATE TABLE `frete` (
-  `id_frete` int(11) NOT NULL,
-  `distanciaKm` decimal(5,2) NOT NULL,
-  `preco` decimal(10,4) NOT NULL,
-  `dataCriacao` date DEFAULT curdate()
+  `Id_frete` int(11) NOT NULL,
+  `DistanciaKm` decimal(5,2) NOT NULL,
+  `Preco` decimal(10,4) NOT NULL,
+  `DataCriacao` date DEFAULT curdate()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `frete`
 --
 
-INSERT INTO `frete` (`id_frete`, `distanciaKm`, `preco`, `dataCriacao`) VALUES
+INSERT INTO `frete` (`Id_frete`, `DistanciaKm`, `Preco`, `DataCriacao`) VALUES
 (1, 5.00, 8.5000, '2024-11-05'),
 (2, 10.00, 12.0000, '2024-11-05'),
 (3, 15.00, 15.7500, '2024-11-05'),
@@ -139,16 +139,16 @@ INSERT INTO `frete` (`id_frete`, `distanciaKm`, `preco`, `dataCriacao`) VALUES
 --
 
 CREATE TABLE `ingrediente` (
-  `id_ingrediente` int(11) NOT NULL,
-  `nome` varchar(100) NOT NULL,
-  `disponivel` tinyint(1) DEFAULT 1
+  `Id_ingrediente` int(11) NOT NULL,
+  `Nome` varchar(100) NOT NULL,
+  `Disponivel` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `ingrediente`
 --
 
-INSERT INTO `ingrediente` (`id_ingrediente`, `nome`, `disponivel`) VALUES
+INSERT INTO `ingrediente` (`Id_ingrediente`, `Nome`, `Disponivel`) VALUES
 (1, 'Mussarela', 1),
 (2, 'Tomate', 1),
 (3, 'Orégano', 1),
@@ -162,15 +162,15 @@ INSERT INTO `ingrediente` (`id_ingrediente`, `nome`, `disponivel`) VALUES
 --
 
 CREATE TABLE `pagamento` (
-  `id_pagamento` int(11) NOT NULL,
-  `descricao` varchar(100) NOT NULL
+  `Id_pagamento` int(11) NOT NULL,
+  `Descricao` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `pagamento`
 --
 
-INSERT INTO `pagamento` (`id_pagamento`, `descricao`) VALUES
+INSERT INTO `pagamento` (`Id_pagamento`, `Descricao`) VALUES
 (1, 'Dinheiro'),
 (2, 'Cartão de Crédito'),
 (3, 'Cartão de Débito'),
@@ -184,20 +184,20 @@ INSERT INTO `pagamento` (`id_pagamento`, `descricao`) VALUES
 --
 
 CREATE TABLE `pedido` (
-  `id_pedido` int(11) NOT NULL,
-  `id_entregador` int(11) DEFAULT NULL,
-  `id_frete` int(11) NOT NULL,
-  `id_pagamento` int(11) NOT NULL,
-  `dataVenda` date DEFAULT curdate(),
-  `valorFrete` decimal(10,2) NOT NULL DEFAULT 0.00,
-  `entrega` tinyint(1) DEFAULT 0
+  `Id_Pedido` int(11) NOT NULL,
+  `Id_Entregador` int(11) DEFAULT NULL,
+  `Id_Frete` int(11) NOT NULL,
+  `Id_Pagamento` int(11) NOT NULL,
+  `DataVenda` date DEFAULT curdate(),
+  `ValorFrete` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `Entrega` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `pedido`
 --
 
-INSERT INTO `pedido` (`id_pedido`, `id_entregador`, `id_frete`, `id_pagamento`, `dataVenda`, `valorFrete`, `entrega`) VALUES
+INSERT INTO `pedido` (`Id_Pedido`, `Id_Entregador`, `Id_Frete`, `Id_Pagamento`, `DataVenda`, `ValorFrete`, `Entrega`) VALUES
 (1, 1, 1, 1, '2024-11-05', 8.50, 0),
 (2, 2, 2, 2, '2024-11-05', 12.00, 0),
 (3, 1, 3, 3, '2024-11-05', 15.75, 0),
@@ -211,20 +211,20 @@ INSERT INTO `pedido` (`id_pedido`, `id_entregador`, `id_frete`, `id_pagamento`, 
 --
 
 CREATE TABLE `pedido_item` (
-  `id_item_pedido` int(11) NOT NULL,
-  `id_pedido` int(11) NOT NULL,
-  `id_produto` int(11) NOT NULL,
-  `nome` varchar(100) NOT NULL,
-  `descricao` text DEFAULT NULL,
-  `valorUnitario` decimal(10,2) NOT NULL,
-  `quantidade` int(11) NOT NULL
+  `Id_Item_Pedido` int(11) NOT NULL,
+  `Id_Pedido` int(11) NOT NULL,
+  `Id_Produto` int(11) NOT NULL,
+  `Nome` varchar(100) NOT NULL,
+  `Descricao` text DEFAULT NULL,
+  `ValorUnitario` decimal(10,2) NOT NULL,
+  `Quantidade` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `pedido_item`
 --
 
-INSERT INTO `pedido_item` (`id_item_pedido`, `id_pedido`, `id_produto`, `nome`, `descricao`, `valorUnitario`, `quantidade`) VALUES
+INSERT INTO `pedido_item` (`Id_Item_Pedido`, `Id_Pedido`, `Id_Produto`, `Nome`, `Descricao`, `ValorUnitario`, `Quantidade`) VALUES
 (6, 1, 1, 'Pizza Margherita', 'Molho de tomate, mussarela e manjericão', 30.00, 1),
 (7, 1, 3, 'Refrigerante 2L', 'Refrigerante de cola 2L', 10.00, 2),
 (8, 2, 2, 'Pizza de Chocolate', 'Cobertura de chocolate ao leite e granulado', 35.00, 1),
@@ -238,20 +238,20 @@ INSERT INTO `pedido_item` (`id_item_pedido`, `id_pedido`, `id_produto`, `nome`, 
 --
 
 CREATE TABLE `produto` (
-  `id_produto` int(11) NOT NULL,
-  `nome` varchar(100) NOT NULL,
-  `dataCriacao` date DEFAULT curdate(),
-  `preco` decimal(10,2) NOT NULL,
-  `descricao` text DEFAULT NULL,
-  `disponivel` tinyint(1) DEFAULT 1,
-  `id_categoria` int(11) DEFAULT NULL
+  `Id_Produto` int(11) NOT NULL,
+  `Nome` varchar(100) NOT NULL,
+  `DataCriacao` date DEFAULT curdate(),
+  `Preco` decimal(10,2) NOT NULL,
+  `Descricao` text DEFAULT NULL,
+  `Disponivel` tinyint(1) DEFAULT 1,
+  `Id_Categoria` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `produto`
 --
 
-INSERT INTO `produto` (`id_produto`, `nome`, `dataCriacao`, `preco`, `descricao`, `disponivel`, `id_categoria`) VALUES
+INSERT INTO `produto` (`Id_Produto`, `Nome`, `DataCriacao`, `Preco`, `Descricao`, `Disponivel`, `Id_Categoria`) VALUES
 (1, 'Pizza Margherita', '2024-11-05', 30.00, 'Molho de tomate, mussarela e manjericão', 1, 1),
 (2, 'Pizza de Chocolate', '2024-11-05', 35.00, 'Cobertura de chocolate ao leite e granulado', 1, 2),
 (3, 'Refrigerante 2L', '2024-11-05', 10.00, 'Refrigerante de cola 2L', 1, 3),
@@ -265,8 +265,8 @@ INSERT INTO `produto` (`id_produto`, `nome`, `dataCriacao`, `preco`, `descricao`
 --
 
 CREATE TABLE `produto_ingrediente` (
-  `id_produto` int(11) NOT NULL,
-  `id_ingrediente` int(11) NOT NULL
+  `Id_produto` int(11) NOT NULL,
+  `Id_ingrediente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -276,14 +276,14 @@ DELIMITER $$
 CREATE TRIGGER `AtualizaDescricaoProduto_After_Delete` AFTER DELETE ON `produto_ingrediente` FOR EACH ROW BEGIN
     DECLARE ingredientes TEXT;
     
-    SELECT COALESCE(GROUP_CONCAT(i.nome SEPARATOR ', '), '') INTO ingredientes
-    FROM produto_ingrediente pi
-    JOIN ingrediente i ON pi.id_ingrediente = i.id_ingrediente
-    WHERE pi.id_produto = OLD.id_produto;
+    SELECT COALESCE(GROUP_CONCAT(i.Nome SEPARATOR ', '), '') INTO ingredientes
+    FROM Produto_Ingrediente pi
+    JOIN Ingrediente i ON pi.Id_ingrediente = i.Id_ingrediente
+    WHERE pi.Id_produto = OLD.Id_produto;
     
-    UPDATE produto
-    SET descricao = ingredientes
-    WHERE id_produto = OLD.id_produto;
+    UPDATE Produto
+    SET Descricao = ingredientes
+    WHERE Id_produto = OLD.Id_produto;
 END
 $$
 DELIMITER ;
@@ -292,13 +292,13 @@ CREATE TRIGGER `AtualizaDescricaoProduto_After_Insert` AFTER INSERT ON `produto_
     DECLARE ingredientes TEXT;
     
     SELECT COALESCE(GROUP_CONCAT(i.Nome SEPARATOR ', '), '') INTO ingredientes
-    FROM produto_ingrediente pi
-    JOIN ingrediente i ON pi.id_ingrediente = i.id_ingrediente
-    WHERE pi.id_produto = NEW.id_produto;
+    FROM Produto_Ingrediente pi
+    JOIN Ingrediente i ON pi.Id_ingrediente = i.Id_ingrediente
+    WHERE pi.Id_produto = NEW.Id_produto;
     
-    UPDATE produto
-    SET descricao = ingredientes
-    WHERE id_produto = NEW.id_produto;
+    UPDATE Produto
+    SET Descricao = ingredientes
+    WHERE Id_produto = NEW.Id_produto;
 END
 $$
 DELIMITER ;
@@ -310,10 +310,10 @@ DELIMITER ;
 --
 
 CREATE TABLE `usuario` (
-  `id_usuario` int(11) NOT NULL,
-  `nome` varchar(100) DEFAULT NULL,
-  `usuario` varchar(50) NOT NULL,
-  `senha` varchar(60) NOT NULL
+  `Id_Usuario` int(11) NOT NULL,
+  `Nome` varchar(100) DEFAULT NULL,
+  `Usuario` varchar(50) NOT NULL,
+  `Senha` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -324,70 +324,70 @@ CREATE TABLE `usuario` (
 -- Índices de tabela `categoria`
 --
 ALTER TABLE `categoria`
-  ADD PRIMARY KEY (`id_categoria`),
-  ADD UNIQUE KEY `nome` (`nome`);
+  ADD PRIMARY KEY (`Id_Categoria`),
+  ADD UNIQUE KEY `Nome` (`Nome`);
 
 --
 -- Índices de tabela `entregador`
 --
 ALTER TABLE `entregador`
-  ADD PRIMARY KEY (`id_entregador`);
+  ADD PRIMARY KEY (`Id_entregador`);
 
 --
 -- Índices de tabela `frete`
 --
 ALTER TABLE `frete`
-  ADD PRIMARY KEY (`id_frete`);
+  ADD PRIMARY KEY (`Id_frete`);
 
 --
 -- Índices de tabela `ingrediente`
 --
 ALTER TABLE `ingrediente`
-  ADD PRIMARY KEY (`id_ingrediente`);
+  ADD PRIMARY KEY (`Id_ingrediente`);
 
 --
 -- Índices de tabela `pagamento`
 --
 ALTER TABLE `pagamento`
-  ADD PRIMARY KEY (`id_pagamento`);
+  ADD PRIMARY KEY (`Id_pagamento`);
 
 --
 -- Índices de tabela `pedido`
 --
 ALTER TABLE `pedido`
-  ADD PRIMARY KEY (`id_pedido`),
-  ADD KEY `id_dntregador` (`id_entregador`),
-  ADD KEY `id_frete` (`id_frete`),
-  ADD KEY `id_pagamento` (`id_pagamento`);
+  ADD PRIMARY KEY (`Id_Pedido`),
+  ADD KEY `Id_Entregador` (`Id_Entregador`),
+  ADD KEY `Id_Frete` (`Id_Frete`),
+  ADD KEY `Id_Pagamento` (`Id_Pagamento`);
 
 --
 -- Índices de tabela `pedido_item`
 --
 ALTER TABLE `pedido_item`
-  ADD PRIMARY KEY (`id_item_pedido`),
-  ADD KEY `id_pedido` (`id_pedido`),
-  ADD KEY `id_produto` (`id_produto`);
+  ADD PRIMARY KEY (`Id_Item_Pedido`),
+  ADD KEY `Id_Pedido` (`Id_Pedido`),
+  ADD KEY `Id_Produto` (`Id_Produto`);
 
 --
 -- Índices de tabela `produto`
 --
 ALTER TABLE `produto`
-  ADD PRIMARY KEY (`id_produto`),
-  ADD KEY `id_categoria` (`id_categoria`);
+  ADD PRIMARY KEY (`Id_Produto`),
+  ADD KEY `Id_Categoria` (`Id_Categoria`);
 
 --
 -- Índices de tabela `produto_ingrediente`
 --
 ALTER TABLE `produto_ingrediente`
-  ADD PRIMARY KEY (`id_produto`,`id_ingrediente`),
-  ADD KEY `id_ingrediente` (`id_ingrediente`);
+  ADD PRIMARY KEY (`Id_produto`,`Id_ingrediente`),
+  ADD KEY `Id_ingrediente` (`Id_ingrediente`);
 
 --
 -- Índices de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id_usuario`),
-  ADD UNIQUE KEY `usuario` (`usuario`);
+  ADD PRIMARY KEY (`Id_Usuario`),
+  ADD UNIQUE KEY `Usuario` (`Usuario`);
 
 --
 -- AUTO_INCREMENT para tabelas despejadas
@@ -397,49 +397,49 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id_Categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id_Categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `entregador`
 --
 ALTER TABLE `entregador`
-  MODIFY `id_entregador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id_entregador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `frete`
 --
 ALTER TABLE `frete`
-  MODIFY `id_frete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id_frete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `ingrediente`
 --
 ALTER TABLE `ingrediente`
-  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id_Pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `pedido_item`
 --
 ALTER TABLE `pedido_item`
-  MODIFY `id_item_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `Id_Item_Pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id_Produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_Usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_Usuario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para tabelas despejadas
@@ -449,29 +449,29 @@ ALTER TABLE `usuario`
 -- Restrições para tabelas `pedido`
 --
 ALTER TABLE `pedido`
-  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_entregador`) REFERENCES `entregador` (`id_entregador`),
-  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`id_frete`) REFERENCES `frete` (`id_frete`),
-  ADD CONSTRAINT `pedido_ibfk_3` FOREIGN KEY (`id_pagamento`) REFERENCES `pagamento` (`id_pagamento`);
+  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`Id_Entregador`) REFERENCES `entregador` (`Id_entregador`),
+  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`Id_Frete`) REFERENCES `frete` (`Id_frete`),
+  ADD CONSTRAINT `pedido_ibfk_3` FOREIGN KEY (`Id_Pagamento`) REFERENCES `pagamento` (`Id_pagamento`);
 
 --
 -- Restrições para tabelas `pedido_item`
 --
 ALTER TABLE `pedido_item`
-  ADD CONSTRAINT `pedido_item_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id_pedido`),
-  ADD CONSTRAINT `pedido_item_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id_produto`);
+  ADD CONSTRAINT `pedido_item_ibfk_1` FOREIGN KEY (`Id_Pedido`) REFERENCES `pedido` (`Id_Pedido`),
+  ADD CONSTRAINT `pedido_item_ibfk_2` FOREIGN KEY (`Id_Produto`) REFERENCES `produto` (`Id_Produto`);
 
 --
 -- Restrições para tabelas `produto`
 --
 ALTER TABLE `produto`
-  ADD CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`);
+  ADD CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`Id_Categoria`) REFERENCES `categoria` (`Id_Categoria`);
 
 --
 -- Restrições para tabelas `produto_ingrediente`
 --
 ALTER TABLE `produto_ingrediente`
-  ADD CONSTRAINT `produto_ingrediente_ibfk_1` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id_produto`),
-  ADD CONSTRAINT `produto_ingrediente_ibfk_2` FOREIGN KEY (`id_ingrediente`) REFERENCES `ingrediente` (`id_ingrediente`);
+  ADD CONSTRAINT `produto_ingrediente_ibfk_1` FOREIGN KEY (`Id_produto`) REFERENCES `produto` (`Id_Produto`),
+  ADD CONSTRAINT `produto_ingrediente_ibfk_2` FOREIGN KEY (`Id_ingrediente`) REFERENCES `ingrediente` (`Id_ingrediente`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
