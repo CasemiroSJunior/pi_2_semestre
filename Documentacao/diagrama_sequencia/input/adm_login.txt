@@ -1,0 +1,11 @@
+@startuml
+actor ADM
+ADM -> Sistema : Inserir usuário e senha
+Sistema -> BancoDeDados : Verificar credenciais
+BancoDeDados --> Sistema : Credenciais válidas/Inválidas
+alt Retorno Credenciais
+    Sistema --> ADM : Login realizado com sucesso
+else
+    Sistema --> ADM : Falha no login
+end
+@enduml

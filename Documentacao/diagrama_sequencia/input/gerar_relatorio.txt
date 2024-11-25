@@ -1,0 +1,7 @@
+@startuml
+actor ADM
+ADM -> Sistema : Solicitar geração de relatório
+Sistema -> BancoDeDados : Consultar dados necessários
+BancoDeDados --> Sistema : Dados retornados
+Sistema --> ADM : Relatório gerado com sucesso
+@enduml
