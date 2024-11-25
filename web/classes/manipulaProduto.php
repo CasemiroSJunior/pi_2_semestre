@@ -25,6 +25,7 @@ class manipulaProduto
         
         if ($stmt->execute()) {
             //A função lastInsertId, de acordo com a documentação do PHP, tem como objetivo retornar o valor da última linha inserida.
+            //Estava com problemas na hora de tentar cadastrar utilizando o auto-incrementy do banco.
             return $this->conexao->conectar()->lastInsertId();
         } else {
             return false;
