@@ -14,15 +14,21 @@ class manipulaProduto
         $this->conexao = null;
     }
 
-    public function cadastroProduto($nome, $descricao, $preco, $disponivel)
+    public function cadastroProduto($nome, $preco, $disponivel, $categoria)
     {
-        $sql = "INSERT INTO produto (Nome, Descricao, Preco, Disponivel) VALUES (:nome, :descricao, :preco, 1)";
+        $sql = "INSERT INTO produto (Nome, Preco, Disponivel, ID_Categoria) VALUES (:nome, :preco, :disponivel, :categoria)";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':nome', $nome);
-        $stmt->bindParam(':descricao', $descricao);
         $stmt->bindParam(':preco', $preco);
-
-        return $stmt->execute(); 
+        $stmt->bindParam(':disponivel', $disponivel);
+        $stmt->bindParam(':categoria', $categoria);
+        
+        if ($stmt->execute()) {
+            //A função lastInsertId, de acordo com a documentação do PHP, tem como objetivo retornar o valor da última linha inserida.
+            return $this->conexao->conectar()->lastInsertId();
+        } else {
+            return false;
+        }
     }
 
     public function adicionaIngredienteProduto($id_produto, $id_ingrediente)
