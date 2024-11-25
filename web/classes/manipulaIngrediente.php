@@ -16,7 +16,7 @@ class manipulaIngrediente
 
     public function cadastroIngrediente($nome, $disponivel)
     {
-        $sql = "INSERT INTO Ingrediente (Nome, Disponivel) VALUES (:nome, :disponivel)";
+        $sql = "INSERT INTO ingrediente (nome, disponivel) VALUES (:nome, :disponivel)";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':disponivel', $disponivel);
@@ -26,14 +26,14 @@ class manipulaIngrediente
 
     public function listaIngrediente()
     {
-        $sql = "SELECT * FROM Ingrediente";
+        $sql = "SELECT * FROM ingrediente";
         $stmt = $this->conexao->conectar()->query($sql);
         return $stmt->fetchAll();
     }
 
     public function atualizaIngrediente($id, $nome, $disponivel)
     {
-        $sql = "UPDATE Ingrediente SET Nome = :nome, Disponivel = :disponivel WHERE Id_ingrediente = :id";
+        $sql = "UPDATE ingrediente SET nome = :nome, disponivel = :disponivel WHERE id_ingrediente = :id";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':nome', $nome);
@@ -44,7 +44,7 @@ class manipulaIngrediente
 
     public function removeIngrediente($id)
     {
-        $sql = "DELETE FROM Ingrediente WHERE Id_ingrediente = :id";
+        $sql = "DELETE FROM ingrediente WHERE id_ingrediente = :id";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':id', $id);
         

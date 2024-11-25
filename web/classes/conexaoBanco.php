@@ -4,7 +4,7 @@ class conexaoBanco
 {
     // Setando atributos da base de dados
     private $host = "localhost";
-    private $dbname = "BANCO";
+    private $dbname = "banco";
     private $username = "root";
     private $password = "";
     private $conexao;

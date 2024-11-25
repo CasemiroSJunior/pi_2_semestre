@@ -16,7 +16,7 @@ class manipulaProduto
 
     public function cadastroProduto($nome, $preco, $disponivel, $categoria)
     {
-        $sql = "INSERT INTO produto (Nome, Preco, Disponivel, ID_Categoria) VALUES (:nome, :preco, :disponivel, :categoria)";
+        $sql = "INSERT INTO produto (nome, preco, disponivel, id_categoria) VALUES (:nome, :preco, :disponivel, :categoria)";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':preco', $preco);
@@ -34,7 +34,7 @@ class manipulaProduto
 
     public function adicionaIngredienteProduto($id_produto, $id_ingrediente)
     {
-        $sql = "INSERT INTO Produto_Ingrediente (id_produto, id_ingrediente) VALUES (:id_produto, :id_ingrediente)";
+        $sql = "INSERT INTO produto_Ingrediente (id_produto, id_ingrediente) VALUES (:id_produto, :id_ingrediente)";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':id_produto', $id_produto);
         $stmt->bindParam(':id_ingrediente', $id_ingrediente);
@@ -43,7 +43,7 @@ class manipulaProduto
 
     public function atualizarStatusProduto($id_produto)
     {
-        $sql = "SELECT i.disponivel FROM Produto_Ingrediente pi INNER JOIN Ingrediente i ON pi.id_ingrediente = i.id_ingrediente WHERE pi.id_produto = :id_produto";
+        $sql = "SELECT i.disponivel FROM produto_ingrediente pi INNER JOIN ingrediente i ON pi.id_ingrediente = i.id_ingrediente WHERE pi.id_produto = :id_produto";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':id_produto', $id_produto);
         $stmt->execute();
@@ -63,7 +63,7 @@ class manipulaProduto
 
     public function produtoFalso($id_produto)
     {
-        $sql = "UPDATE Produto SET status = 0 WHERE id_produto = :id_produto";
+        $sql = "UPDATE produto SET status = 0 WHERE id_produto = :id_produto";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':id_produto', $id_produto);
         return $stmt->execute();
@@ -71,7 +71,7 @@ class manipulaProduto
 
     public function produtoVerdadeiro($id_produto)
     {
-        $sql = "UPDATE Produto SET status = 1 WHERE id_produto = :id_produto";
+        $sql = "UPDATE produto SET status = 1 WHERE id_produto = :id_produto";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':id_produto', $id_produto);
         return $stmt->execute();
@@ -79,14 +79,14 @@ class manipulaProduto
 
     public function listaProduto()
     {
-        $sql = "SELECT Nome, Descricao, Preco FROM Produto";
+        $sql = "SELECT nome, descricao, preco FROM produto";
         $stmt = $this->conexao->conectar()->query($sql);
         return $stmt->fetchAll();
     }
 
     public function atualizaProduto($id, $nome, $preco)
     {
-        $sql = "UPDATE Produto SET Nome = :nome, Preco = :preco WHERE Id_Produto = :id";
+        $sql = "UPDATE produto SET nome = :nome, preco = :preco WHERE id_produto = :id";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':nome', $nome);
@@ -97,7 +97,7 @@ class manipulaProduto
 
     public function removeProduto($id)
     {
-        $sql = "DELETE FROM Produto WHERE Id_produto = :id";
+        $sql = "DELETE FROM produto WHERE id_produto = :id";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':id', $id);
         
