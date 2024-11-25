@@ -19,7 +19,7 @@ class Produto
     public function obterCategoria()
     {
         // Preparando a consulta da categoria
-        $sql = "SELECT ID_CATEGORIA, NOME FROM CATEGORIA";
+        $sql = "SELECT ID_CATEGORIA, NOME FROM categoria";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->execute();
 
