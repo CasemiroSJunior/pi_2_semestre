@@ -15,7 +15,7 @@ class Produto
         $this->conexao = null;
     }
 
-    //Funcao que retorna a categoria dos produtos
+    //Método que retorna a categoria dos produtos
     public function obterCategoria()
     {
         // Preparando a consulta da categoria
@@ -27,7 +27,7 @@ class Produto
         return $stmt->fetchAll();
     }
 
-    //Funcao que retorna os produtos por categoria
+    //Método que retorna os produtos por categoria
     public function obterProdutoPorCategoria($categoriaId) 
     {
         $sql = "SELECT NOME, DESCRICAO, PRECO FROM PRODUTO WHERE ID_CATEGORIA = :categoriaId";
