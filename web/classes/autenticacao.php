@@ -1,5 +1,6 @@
 <?php
 require_once 'conexaoBanco.php';
+session_start();
 class autenticacaoLogin
 {
 
@@ -38,6 +39,7 @@ class autenticacaoLogin
         if ($password === $senhaArmazenada) 
         { 
             //Login deu bom
+            $_SESSION["logado"] = TRUE;
             return true;
         } 
         else 
@@ -59,4 +61,19 @@ class autenticacaoLogin
             echo "Nome de usuário ou senha incorretos.";
         }
     }
+
+    public function verificaLogado() 
+    { 
+        if ($_SESSION["logado"]) {
+            return TRUE;
+        }
+        $this->logout();
+    } 
+
+    public function logout() 
+    { 
+        session_destroy();
+        header("Location: login.php");
+        exit();
+    } 
 }

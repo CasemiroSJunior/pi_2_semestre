@@ -1,9 +1,6 @@
 <?php
-//Importando classes que serao utilizadas
-require_once './classes/conexaoBanco.php';
 require_once './classes/autenticacao.php';
 
-//Definindo o método de requisicao
 if ($_SERVER['REQUEST_METHOD'] === 'POST') 
 {
     $username = $_POST['username'];
