@@ -40,6 +40,7 @@ class autenticacaoLogin
         { 
             //Login deu bom
             $_SESSION["logado"] = TRUE;
+            $_SESSION["username"] = $username;
             return true;
         } 
         else 
@@ -57,8 +58,11 @@ class autenticacaoLogin
             header('Location: menu.php');
         } 
         else 
-        {
-            echo "Nome de usuário ou senha incorretos.";
+        {   
+            header('Location: login.php');
+            echo '<script>
+                alert("Usuário ou senha incorretos!");
+            </script>';
         }
     }
 

@@ -54,9 +54,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                 <img src="./assets/Logo.png" class="img-fluid "  alt="Imagem de Fundo">
             </div>
             <div class="col-md-12 d-flex align-items-center justify-content-center">
-                <div class="login-form">
+                <div class="login-auth.php">
                     <h2>Login</h2>
-                    <form action="" method="POST">
+                    <form action="login-auth.php" method="POST">
                         <div class="form-group">
                             <label for="username">Usuário</label>
                             <input type="text" name="username" id="username" class="form-control" required>
