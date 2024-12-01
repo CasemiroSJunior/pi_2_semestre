@@ -1,9 +1,5 @@
 <?php
 require_once './classes/manipulaIngrediente.php';
-require './classes/autenticacao.php';
-
-$validador = new autenticacaoLogin();
-$validador->verificaLogado();
 
 $manipula = new manipulaIngrediente();
 
