@@ -25,6 +25,19 @@ DELIMITER $$
 --
 -- Procedimentos
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GerarRelatorioProdutos` ()   BEGIN
+    SELECT 
+        p.Id_Produto as Codigo,
+        p.Nome as Nome,  
+        p.Descricao as Descricao,
+        p.Preco as PrecoVenda
+    FROM 
+        produto p
+    WHERE
+        disponivel = 1;
+END$$
+
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GerarRelatorioVendasPorEntregador` ()   BEGIN
     SELECT 
         e.Nome AS Nome_Entregador,

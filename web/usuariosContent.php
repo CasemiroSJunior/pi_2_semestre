@@ -1,6 +1,5 @@
 <?php
 require_once './classes/manipulaUsuario.php';
-
 $manipula = new manipulaUsuario();
 
 $msg = '';
