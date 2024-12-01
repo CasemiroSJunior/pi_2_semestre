@@ -1,0 +1,72 @@
+@startuml
+
+class autenticacaoLogin {
+    -conexao: conexaoBanco
+    +__construct()
+    +__destruct()
+    +login(username: String, password: String): bool
+    +verificaLogin(username: String, password: String): void
+    +verificaLogado(): bool
+    +logout(): void
+}
+
+class conexaoBanco {
+    -host: String
+    -dbname: String
+    -username: String
+    -password: String
+    -conexao: PDO
+    +conectar(): PDO
+}
+
+class manipulaIngrediente {
+    -conexao: conexaoBanco
+    +__construct()
+    +__destruct()
+    +cadastroIngrediente(nome: String, disponivel: bool): bool
+    +listaIngrediente(): Array
+    +atualizaIngrediente(id: int, nome: String, disponivel: bool): bool
+    +removeIngrediente(id: int): bool
+}
+
+class manipulaProduto {
+    -conexao: conexaoBanco
+    +__construct()
+    +__destruct()
+    +cadastroProduto(nome: String, preco: float, disponivel: bool, categoria: int): int
+    +adicionaIngredienteProduto(id_produto: int, id_ingrediente: int): bool
+    +atualizarStatusProduto(id_produto: int): void
+    +produtoFalso(id_produto: int): bool
+    +produtoVerdadeiro(id_produto: int): bool
+    +listaProduto(): Array
+    +atualizaProduto(id: int, nome: String, preco: float): bool
+    +removeProduto(id: int): bool
+}
+
+class manipulaUsuario {
+    -conexao: conexaoBanco
+    +__construct()
+    +__destruct()
+    +cadastroUsuario(nome: String, usuario: String, senha: String): bool
+    +listaUsuario(): Array
+    +atualizaUsuario(id: int, nome: String, usuario: String, senha: String): bool
+    +removeUsuario(id: int): bool
+}
+
+class Produto {
+    -conexao: conexaoBanco
+    +__construct()
+    +__destruct()
+    +obterCategoria(): Array
+    +obterProdutoPorCategoria(categoriaId: int): Array
+}
+
+autenticacaoLogin --> conexaoBanco
+manipulaIngrediente --> conexaoBanco
+manipulaProduto --> conexaoBanco
+manipulaUsuario --> conexaoBanco
+Produto --> conexaoBanco
+
+manipulaProduto --> manipulaIngrediente : "usa"
+manipulaProduto --> Produto : "manipula"
+@enduml
