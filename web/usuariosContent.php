@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($acao === 'incluir' && !empty($nome) && !empty($usuario) && !empty($senha)) {
         // Verifica se o usuario ja existe no banco
-        $sql = "SELECT COUNT(*) FROM usuario WHERE Usuario = :usuario";
+        $sql = "select count(*) from usuario where usuario = :usuario";
         $stmt = (new conexaoBanco())->conectar()->prepare($sql);
         $stmt->bindParam(':usuario', $usuario);
         $stmt->execute();

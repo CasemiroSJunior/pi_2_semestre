@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($acao === 'incluir' && !empty($nome)) {
         // Verifica se o ingrediente já existe no banco
-        $sql = "SELECT COUNT(*) FROM Ingrediente WHERE Nome = :nome";
+        $sql = "select count(*) from ingrediente where nome = :nome";
         $stmt = (new conexaoBanco())->conectar()->prepare($sql);
         $stmt->bindParam(':nome', $nome);
         $stmt->execute();

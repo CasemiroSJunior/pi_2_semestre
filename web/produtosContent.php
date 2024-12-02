@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($acao === 'incluir' && !empty($nome) && $preco > 0 && $categoria) {
         // Verifica se o produto já existe no banco
-        $sql = "SELECT COUNT(*) FROM Produto WHERE Nome = :nome";
+        $sql = "select count(*) from produto where nome = :nome";
         $stmt = (new conexaoBanco())->conectar()->prepare($sql);
         $stmt->bindParam(':nome', $nome);
         $stmt->execute();
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($acao === 'excluir' && $id) {
         try {
             // Exclui os registros da tabela de relacionamento
-            $sql = "DELETE FROM produto_ingrediente WHERE Id_Produto = :id_produto";
+            $sql = "delete from produto_ingrediente where id_produto = :id_produto";
             $stmt = (new conexaoBanco())->conectar()->prepare($sql);
             $stmt->bindParam(':id_produto', $id);
             $stmt->execute();
@@ -109,10 +109,10 @@ $categorias = (new Produto())->obterCategoria();
                     <td>
                         <?php
                         // Buscar ingredientes associados a esse produto
-                        $sql = "SELECT i.Nome, i.Disponivel
-                                FROM ingrediente i
-                                JOIN produto_ingrediente pi ON pi.Id_Ingrediente = i.Id_ingrediente
-                                WHERE pi.Id_Produto = ?";
+                        $sql = "select i.nome, i.disponivel
+                                from ingrediente i
+                                join produto_ingrediente pi on pi.id_ingrediente = i.id_ingrediente
+                                where pi.id_produto = ?";
                         $stmt = (new conexaoBanco())->conectar()->prepare($sql);
                         $stmt->execute([$produto['Id_Produto']]);
                         $ingredientesProduto = $stmt->fetchAll(PDO::FETCH_ASSOC);

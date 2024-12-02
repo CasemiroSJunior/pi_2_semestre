@@ -18,7 +18,7 @@ class manipulaUsuario
     public function cadastroUsuario($nome, $usuario, $senha)
     {
         
-        $sql = "INSERT INTO usuario (Nome, Usuario, Senha) VALUES (:nome, :usuario, :senha)";
+        $sql = "insert into usuario (nome, usuario, senha) values (:nome, :usuario, :senha)";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':usuario', $usuario);
@@ -29,7 +29,7 @@ class manipulaUsuario
 
     public function listaUsuario()
     {
-        $sql = "SELECT * FROM usuario";
+        $sql = "select * from usuario";
         $stmt = $this->conexao->conectar()->query($sql);
         return $stmt->fetchAll();
     }
@@ -37,12 +37,12 @@ class manipulaUsuario
     public function atualizaUsuario($id, $nome, $usuario, $senha)
     {
         if ($senha) {
-            $sql = "UPDATE usuario SET Nome = :nome, Usuario = :usuario, Senha = :senha WHERE Id_Usuario = :id";
+            $sql = "update usuario set nome = :nome, usuario = :usuario, senha = :senha where id_usuario = :id";
             $stmt = $this->conexao->conectar()->prepare($sql);
             $stmt->bindParam(':senha', $senha);
         } else {
             
-            $sql = "UPDATE usuario SET Nome = :nome, Usuario = :usuario WHERE Id_Usuario = :id";
+            $sql = "update usuario set nome = :nome, usuario = :usuario where id_usuario = :id";
             $stmt = $this->conexao->conectar()->prepare($sql);
         }
 
@@ -55,7 +55,7 @@ class manipulaUsuario
 
     public function removeUsuario($id)
     {
-        $sql = "DELETE FROM usuario WHERE Id_Usuario = :id";
+        $sql = "delete from usuario where id_usuario = :id";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':id', $id);
 

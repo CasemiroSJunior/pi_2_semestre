@@ -16,7 +16,7 @@ class manipulaProduto
 
     public function cadastroProduto($nome, $preco, $disponivel, $categoria)
     {
-        $sql = "INSERT INTO produto (Nome, Preco, Disponivel, ID_Categoria) VALUES (:nome, :preco, :disponivel, :categoria)";
+        $sql = "insert into produto (nome, preco, disponivel, id_categoria) values (:nome, :preco, :disponivel, :categoria)";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':preco', $preco);
@@ -34,7 +34,7 @@ class manipulaProduto
 
     public function adicionaIngredienteProduto($id_produto, $id_ingrediente)
     {
-        $sql = "INSERT INTO Produto_Ingrediente (id_produto, id_ingrediente) VALUES (:id_produto, :id_ingrediente)";
+        $sql = "insert into produto_ingrediente (id_produto, id_ingrediente) values (:id_produto, :id_ingrediente)";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':id_produto', $id_produto);
         $stmt->bindParam(':id_ingrediente', $id_ingrediente);
@@ -44,13 +44,13 @@ class manipulaProduto
     public function atualizarStatusProduto($id_produto)
     {
     $sql = "
-    SELECT COUNT(*) AS totalIndisponiveis
-    FROM Produto_Ingrediente pi
-    INNER JOIN Ingrediente i ON pi.Id_Ingrediente = i.Id_Ingrediente
-    WHERE pi.Id_Produto = :idProduto AND i.Disponivel = 0
+    select count(*) as totalindisponiveis
+    from produto_ingrediente pi
+    inner join ingrediente i on pi.id_ingrediente = i.id_ingrediente
+    where pi.id_produto = :idproduto and i.disponivel = 0
     ";
 
-    $stmt = $pdo->prepare($sql);
+    $stmt = $this->conexao->conectar()->prepare($sql);
     $stmt->bindParam(':idProduto', $id_produto, PDO::PARAM_INT);
     $stmt->execute();
 
@@ -60,12 +60,12 @@ class manipulaProduto
     $disponivel = ($indisponiveis == 0) ? 1 : 0;
 
     $sqlUpdate = "
-    UPDATE Produto
-    SET Disponivel = :disponivel
-    WHERE Id_Produto = :idProduto
+    update produto
+    set disponivel = :disponivel
+    where id_produto = :idproduto
     ";
 
-    $stmt = $pdo->prepare($sqlUpdate);
+    $stmt = $this->conexao->conectar()->prepare($sqlUpdate);
     $stmt->bindParam(':disponivel', $disponivel, PDO::PARAM_INT);
     $stmt->bindParam(':idProduto', $id_produto, PDO::PARAM_INT);
 
@@ -74,7 +74,7 @@ class manipulaProduto
 
     public function produtoFalso($id_produto)
     {
-        $sql = "UPDATE Produto SET status = 0 WHERE id_produto = :id_produto";
+        $sql = "update produto set status = 0 where id_produto = :id_produto";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':id_produto', $id_produto);
         return $stmt->execute();
@@ -82,7 +82,7 @@ class manipulaProduto
 
     public function produtoVerdadeiro($id_produto)
     {
-        $sql = "UPDATE Produto SET status = 1 WHERE id_produto = :id_produto";
+        $sql = "update produto set status = 1 where id_produto = :id_produto";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':id_produto', $id_produto);
         return $stmt->execute();
@@ -90,9 +90,9 @@ class manipulaProduto
 
     public function listaProduto()
     {
-        $sql = "SELECT p.Nome, p.Descricao, p.Preco, p.Id_Produto, c.NOME AS Categoria
-        FROM Produto p
-        INNER JOIN Categoria c ON p.Id_Categoria = c.ID_CATEGORIA";
+        $sql = "select p.nome, p.descricao, p.preco, p.id_produto, c.nome as categoria
+        from produto p
+        inner join categoria c on p.id_categoria = c.id_categoria";
         $stmt = $this->conexao->conectar()->query($sql);
         return $stmt->fetchAll();
     }
@@ -100,7 +100,7 @@ class manipulaProduto
 
     public function atualizaProduto($id, $nome, $preco)
     {
-        $sql = "UPDATE Produto SET Nome = :nome, Preco = :preco WHERE Id_Produto = :id";
+        $sql = "update produto set nome = :nome, preco = :preco where id_produto = :id";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':nome', $nome);
@@ -111,7 +111,7 @@ class manipulaProduto
 
     public function removeProduto($id)
     {
-        $sql = "DELETE FROM Produto WHERE Id_produto = :id";
+        $sql = "delete from produto where id_produto = :id";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':id', $id);
         
