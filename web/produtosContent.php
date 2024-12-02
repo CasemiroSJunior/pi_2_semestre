@@ -60,7 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } elseif ($acao === 'vincular_ingrediente' && $id_produto && $id_ingrediente) {
         if ($manipulaProduto->adicionaIngredienteProduto($id_produto, $id_ingrediente)) {
-            $manipulaProduto->atualizarStatusProduto($id_produto);
             $msg = "<div class='alert alert-success'>Ingrediente vinculado ao produto com sucesso.</div>";
         } else {
             $msg = "<div class='alert alert-danger'>Erro ao vincular o ingrediente.</div>";
