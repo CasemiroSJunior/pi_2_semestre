@@ -17,14 +17,12 @@
     <!-- DesktopNav verifica se a resolução do usuário é menor que 768 ou maior, se maior renderiza com a sidebar do dekstop, se menor com o do mobile -->
     <div class="container-fluid desktopNav">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3 ">
                 <?php include './components/sidebarDesktop.php'; ?>
             </div>
             <!-- Renderiza o conteúdo da página selecionada -->
             <div class="col-md-9">
-                <main role="main" class="pt-3">
-                    <?php include $content; ?>
-                </main>
+                <?php include $content; ?>
             </div>
         </div>
     </div>
@@ -36,9 +34,7 @@
                 </div>
 
                 <div>
-                    <main role="main" class="pt-3">
-                        <?php include $content; ?>
-                    </main>
+                    <?php include $content; ?>
                 </div>
             </div>
         </div>

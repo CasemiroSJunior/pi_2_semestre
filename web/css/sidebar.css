@@ -76,6 +76,9 @@ main {
       display: none;
   }
   .mobileNav {
+      width: fit-content !important;
+      margin: 0px !important;
+      padding: 0px !important; 
       display: block;
   }
 }
