@@ -7,7 +7,8 @@ require_once './classes/produto.php';
 
 <head>
   <script src="../assets/js/color-modes.js"></script>
-
+  <script src="/scripts/carrinhoCounter.js"></script>
+  
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
@@ -135,41 +136,38 @@ require_once './classes/produto.php';
   </svg>
 
   <div class="container">
+    <?php
+    // Recupera o valor total dos itens no carrinho a partir do cookie
+    $carrinho = isset($_COOKIE['carrinho']) ? json_decode($_COOKIE['carrinho'], true) : [];
+    $totalItens = array_reduce($carrinho, function ($total, $item) {
+      return $total + (int)$item['quantidade'];
+    }, 0);
+    ?>
     <header class="border-bottom lh-1 py-3">
       <div class="row flex-nowrap justify-content-between align-items-center">
+        <!-- Logo -->
         <div class="col-4 pt-1">
-          <img class="img-fluid" src="./assets/Logo.svg" alt="simple logo ">
+          <a href="index.php" aria-label="Voltar para a página inicial">
+            <img class="img-fluid" src="./assets/Logo.svg" alt="Logo da empresa">
+          </a>
         </div>
+        <!-- Botão do carrinho -->
         <div class="col-4 d-flex justify-content-end align-items-center">
-          <button type="button" class="btn btn-primary position-relative">
+          <a href="carrinho.php" class="btn btn-primary position-relative" aria-label="Abrir o carrinho">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
               <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
             </svg>
-            <span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger">
-              99+
+            <span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger" id="cart-count">
+              <?= $totalItens; ?>
               <span class="visually-hidden">Itens adicionados</span>
             </span>
-          </button>
+          </a>
         </div>
       </div>
     </header>
 
-    <!-- <div class="nav-scroller py-1 mb-3 border-bottom">
-      <nav class="nav nav-underline justify-content-between">
-        <a class="nav-item nav-link link-body-emphasis active" href="#">World</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">U.S.</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">Technology</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">Design</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">Culture</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">Business</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">Politics</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">Opinion</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">Science</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">Health</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">Style</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">Travel</a>
-      </nav>
-    </div> -->
+
+
   </div>
 
   <main class="container">
@@ -188,24 +186,23 @@ require_once './classes/produto.php';
           Produtos
         </h3>
         <?php
-          //Instanciando classe produto.
-          $produto = new Produto();
-          //Chamando o método obter categoria e reservando no categorias.
-          $categorias = $produto->obterCategoria();
-          //Percorre o array categorias, onde cada item pertence a uma categoria da base de dados.
-          //Index guarda a posição do item dentro do array.
-          //Categoria armazena cada elemento de categorias, representando uma categoria especifica.
-          foreach ($categorias as $index => $categoria) 
-          {
-            //Agora categoria e um array associativo e ID_CATEGORIA é a chave que armazena o identificador unico de cada categoria.
-            $categoriaId = $categoria['ID_CATEGORIA'];
-            //Chama o método que obtem o produto de acordo com a categoria passada.
-            $produtos = $produto->obterProdutoPorCategoria($categoriaId);
-            //Chama a função responsavel por mostrar na página os itens separados por categoria.
-            //Index + 1 é pra não startar a partir de 0
-            createAccordionCategory($categoria['NOME'], $produtos, $index + 1);
-          }
-          ?>
+        //Instanciando classe produto.
+        $produto = new Produto();
+        //Chamando o método obter categoria e reservando no categorias.
+        $categorias = $produto->obterCategoria();
+        //Percorre o array categorias, onde cada item pertence a uma categoria da base de dados.
+        //Index guarda a posição do item dentro do array.
+        //Categoria armazena cada elemento de categorias, representando uma categoria especifica.
+        foreach ($categorias as $index => $categoria) {
+          //Agora categoria e um array associativo e ID_CATEGORIA é a chave que armazena o identificador unico de cada categoria.
+          $categoriaId = $categoria['ID_CATEGORIA'];
+          //Chama o método que obtem o produto de acordo com a categoria passada.
+          $produtos = $produto->obterProdutoPorCategoria($categoriaId);
+          //Chama a função responsavel por mostrar na página os itens separados por categoria.
+          //Index + 1 é pra não startar a partir de 0
+          createAccordionCategory($categoria['NOME'], $produtos, $index + 1);
+        }
+        ?>
       </div>
     </div>
     </div>
