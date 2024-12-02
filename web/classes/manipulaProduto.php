@@ -51,7 +51,7 @@ class manipulaProduto
     ";
 
     $stmt = $this->conexao->conectar()->prepare($sql);
-    $stmt->bindParam(':idProduto', $id_produto, PDO::PARAM_INT);
+    $stmt->bindParam(':idproduto', $id_produto, PDO::PARAM_INT);
     $stmt->execute();
 
     $indisponiveis = $stmt->fetchColumn();
@@ -67,7 +67,7 @@ class manipulaProduto
 
     $stmt = $this->conexao->conectar()->prepare($sqlUpdate);
     $stmt->bindParam(':disponivel', $disponivel, PDO::PARAM_INT);
-    $stmt->bindParam(':idProduto', $id_produto, PDO::PARAM_INT);
+    $stmt->bindParam(':idproduto', $id_produto, PDO::PARAM_INT);
 
     return $stmt->execute();
     }

@@ -28,11 +28,11 @@ class Produto
     }
 
     //Método que retorna os produtos por categoria
-    public function obterProdutoPorCategoria($categoriaId) 
+    public function obterProdutoPorCategoria($categoriaid) 
     {
         $sql = "select nome, descricao, preco from produto where id_categoria = :categoriaid";
         $stmt = $this->conexao->conectar()->prepare($sql);
-        $stmt->bindParam(':categoriaId', $categoriaId); 
+        $stmt->bindparam(':categoriaid', $categoriaid); 
         $stmt->execute();
 
         return $stmt->fetchAll();

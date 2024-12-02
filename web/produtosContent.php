@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $preco = $_POST['preco'] ?? 0;
     $categoria = $_POST['categoria'] ?? null;
     $id_ingrediente = $_POST['id_ingrediente'] ?? null;
-    $Id_Produto = $_POST['Id_Produto'] ?? null;
+    $id_produto = $_POST['id_produto'] ?? null;
     $disponivel = $_POST['disponivel'] ?? 0;
 
     if ($acao === 'incluir' && !empty($nome) && $preco > 0 && $categoria) {
@@ -58,9 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (PDOException $e) {
             $msg = "<div class='alert alert-danger'>Erro ao excluir produto: " . $e->getMessage() . "</div>";
         }
-    } elseif ($acao === 'vincular_ingrediente' && $Id_Produto && $id_ingrediente) {
-        if ($manipulaProduto->adicionaIngredienteProduto($Id_Produto, $id_ingrediente)) {
-            $manipulaProduto->atualizarStatusProduto($Id_Produto);
+    } elseif ($acao === 'vincular_ingrediente' && $id_produto && $id_ingrediente) {
+        if ($manipulaProduto->adicionaIngredienteProduto($id_produto, $id_ingrediente)) {
+            $manipulaProduto->atualizarStatusProduto($id_produto);
             $msg = "<div class='alert alert-success'>Ingrediente vinculado ao produto com sucesso.</div>";
         } else {
             $msg = "<div class='alert alert-danger'>Erro ao vincular o ingrediente.</div>";
@@ -103,9 +103,9 @@ $categorias = (new Produto())->obterCategoria();
             <tbody>
                 <?php foreach ($produtos as $produto): ?>
                 <tr>
-                    <td><?= $produto['Id_Produto'] ?></td>
-                    <td><?= htmlspecialchars($produto['Nome']) ?></td>
-                    <td>R$ <?= number_format($produto['Preco'], 2, ',', '.') ?></td>
+                    <td><?= $produto['id_produto'] ?></td>
+                    <td><?= htmlspecialchars($produto['nome']) ?></td>
+                    <td>R$ <?= number_format($produto['preco'], 2, ',', '.') ?></td>
                     <td>
                         <?php
                         // Buscar ingredientes associados a esse produto
@@ -114,33 +114,33 @@ $categorias = (new Produto())->obterCategoria();
                                 join produto_ingrediente pi on pi.id_ingrediente = i.id_ingrediente
                                 where pi.id_produto = ?";
                         $stmt = (new conexaoBanco())->conectar()->prepare($sql);
-                        $stmt->execute([$produto['Id_Produto']]);
+                        $stmt->execute([$produto['id_produto']]);
                         $ingredientesProduto = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         
                         if ($ingredientesProduto) {
                             foreach ($ingredientesProduto as $ingrediente) {
-                                echo htmlspecialchars($ingrediente['Nome']) . " (Disponível: " . ($ingrediente['Disponivel'] ? "Sim" : "Não") . ")<br>";
+                                echo htmlspecialchars($ingrediente['nome']) . " (Disponível: " . ($ingrediente['disponivel'] ? "Sim" : "Não") . ")<br>";
                             }
                         } else {
                             echo "Nenhum ingrediente vinculado.";
                         }
                         ?>
                     </td>
-                    <td><?= htmlspecialchars($produto['Categoria']) ?></td>
+                    <td><?= htmlspecialchars($produto['categoria']) ?></td>
                     <td>
                         <!-- Formulário para editar produto -->
                         <form method="post" style="display:inline;">
                             <input type="hidden" name="acao" value="editar">
-                            <input type="hidden" name="id" value="<?= $produto['Id_Produto'] ?>">
-                            <input type="text" name="nome" placeholder="Nome" required value="<?= $produto['Nome'] ?>">
-                            <input type="number" name="preco" placeholder="Preço" required step="0.01" value="<?= $produto['Preco'] ?>">
+                            <input type="hidden" name="id" value="<?= $produto['id_produto'] ?>">
+                            <input type="text" name="nome" placeholder="Nome" required value="<?= $produto['nome'] ?>">
+                            <input type="number" name="preco" placeholder="Preço" required step="0.01" value="<?= $produto['preco'] ?>">
                             <button class="btn btn-primary btn-sm">Editar</button>
                         </form>
 
                         <!-- Formulário para excluir produto -->
                         <form method="post" style="display:inline;" onsubmit="return confirm('Deseja realmente excluir este produto?');">
                             <input type="hidden" name="acao" value="excluir">
-                            <input type="hidden" name="id" value="<?= $produto['Id_Produto'] ?>">
+                            <input type="hidden" name="id" value="<?= $produto['id_produto'] ?>">
                             <button class="btn btn-danger btn-sm">Excluir</button>
                         </form>
                     </td>
@@ -165,8 +165,8 @@ $categorias = (new Produto())->obterCategoria();
                 <label for="categoria" class="form-label">Categoria</label>
                 <select name="categoria" id="categoria" class="form-select" required>
                     <?php foreach ($categorias as $categoria): ?>
-                        <option value="<?= $categoria['ID_CATEGORIA'] ?>">
-                            <?= htmlspecialchars($categoria['NOME']) ?>
+                        <option value="<?= $categoria['id_categoria'] ?>">
+                            <?= htmlspecialchars($categoria['nome']) ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
@@ -179,11 +179,11 @@ $categorias = (new Produto())->obterCategoria();
         <form method="post" autocomplete="off">
             <input type="hidden" name="acao" value="vincular_ingrediente">
             <div class="mb-3">
-                <label for="Id_Produto" class="form-label">Produto</label>
-                <select name="Id_Produto" id="Id_Produto" class="form-select" required>
+                <label for="id_produto" class="form-label">Produto</label>
+                <select name="id_produto" id="id_produto" class="form-select" required>
                     <?php foreach ($produtos as $produto): ?>
-                        <option value="<?= $produto['Id_Produto'] ?>">
-                            <?= htmlspecialchars($produto['Nome']) ?>
+                        <option value="<?= $produto['id_produto'] ?>">
+                            <?= htmlspecialchars($produto['nome']) ?>
                         </option>
                     <?php endforeach; ?>
                 </select>

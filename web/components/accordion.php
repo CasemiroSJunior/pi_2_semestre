@@ -17,14 +17,14 @@ function createAccordionCategory($category, $children, $categoryId)
         echo '<div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
                     <div class="card-body text-center">
-                        <h5 class="card-title">' . htmlspecialchars($child['NOME']) . '</h5>
-                        <p class="card-text text-muted">' . htmlspecialchars($child['DESCRICAO']) . '</p>
-                        <p class="card-text fw-bold text-success">R$ ' . number_format($child['PRECO'], 2, ',', '.') . '</p>
+                        <h5 class="card-title">' . htmlspecialchars($child['nome']) . '</h5>
+                        <p class="card-text text-muted">' . htmlspecialchars($child['descricao']) . '</p>
+                        <p class="card-text fw-bold text-success">R$ ' . number_format($child['preco'], 2, ',', '.') . '</p>
                         
                         <!-- Formulário para adicionar ao carrinho -->
                         <form method="post" action="add_to_carrinho.php" class="d-flex justify-content-center align-items-center">
-                            <input type="hidden" name="nome" value="' . htmlspecialchars($child['NOME']) . '">
-                            <input type="hidden" name="preco" value="' . htmlspecialchars($child['PRECO']) . '">
+                            <input type="hidden" name="nome" value="' . htmlspecialchars($child['nome']) . '">
+                            <input type="hidden" name="preco" value="' . htmlspecialchars($child['preco']) . '">
                             
                             <input type="number" class="form-control form-control-sm me-2" name="quantidade" min="1" value="1" required style="width: 80px;">
                             <button type="submit" class="btn btn-outline-primary btn-sm">

@@ -186,21 +186,21 @@ require_once './classes/produto.php';
           Produtos
         </h3>
         <?php
-        //Instanciando classe produto.
-        $produto = new Produto();
-        //Chamando o método obter categoria e reservando no categorias.
-        $categorias = $produto->obterCategoria();
-        //Percorre o array categorias, onde cada item pertence a uma categoria da base de dados.
-        //Index guarda a posição do item dentro do array.
-        //Categoria armazena cada elemento de categorias, representando uma categoria especifica.
+        //instanciando classe produto.
+        $produto = new produto();
+        //chamando o método obter categoria e reservando no categorias.
+        $categorias = $produto->obtercategoria();
+        //percorre o array categorias, onde cada item pertence a uma categoria da base de dados.
+        //index guarda a posição do item dentro do array.
+        //categoria armazena cada elemento de categorias, representando uma categoria especifica.
         foreach ($categorias as $index => $categoria) {
-          //Agora categoria e um array associativo e ID_CATEGORIA é a chave que armazena o identificador unico de cada categoria.
-          $categoriaId = $categoria['ID_CATEGORIA'];
-          //Chama o método que obtem o produto de acordo com a categoria passada.
-          $produtos = $produto->obterProdutoPorCategoria($categoriaId);
-          //Chama a função responsavel por mostrar na página os itens separados por categoria.
-          //Index + 1 é pra não startar a partir de 0
-          createAccordionCategory($categoria['NOME'], $produtos, $index + 1);
+          //agora categoria e um array associativo e id_categoria é a chave que armazena o identificador unico de cada categoria.
+          $categoriaid = $categoria['id_categoria'];
+          //chama o método que obtem o produto de acordo com a categoria passada.
+          $produtos = $produto->obterprodutoporcategoria($categoriaid);
+          //chama a função responsavel por mostrar na página os itens separados por categoria.
+          //index + 1 é pra não startar a partir de 0
+          createaccordioncategory($categoria['nome'], $produtos, $index + 1);
         }
         ?>
       </div>
