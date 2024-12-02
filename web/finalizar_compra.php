@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $ddd_pais = "55";
     $ddd_estado = "015";
-    $numero = "19999164102";
+    $numero = "996131073";
     // Defina o número de WhatsApp aqui (apenas números, incluindo código do país)
     $numeroWhatsApp = $ddd_pais . $ddd_estado . $numero;
 
