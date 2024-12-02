@@ -43,22 +43,33 @@ class manipulaProduto
 
     public function atualizarStatusProduto($id_produto)
     {
-        $sql = "SELECT i.disponivel FROM Produto_Ingrediente pi INNER JOIN Ingrediente i ON pi.id_ingrediente = i.id_ingrediente WHERE pi.id_produto = :id_produto";
-        $stmt = $this->conexao->conectar()->prepare($sql);
-        $stmt->bindParam(':id_produto', $id_produto);
-        $stmt->execute();
+    $sql = "
+    SELECT COUNT(*) AS totalIndisponiveis
+    FROM Produto_Ingrediente pi
+    INNER JOIN Ingrediente i ON pi.Id_Ingrediente = i.Id_Ingrediente
+    WHERE pi.Id_Produto = :idProduto AND i.Disponivel = 0
+    ";
 
-        $ingredientes = $stmt->fetchAll();
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':idProduto', $id_produto, PDO::PARAM_INT);
+    $stmt->execute();
 
-        foreach ($ingredientes as $ingrediente) 
-        {
-            if ($ingrediente['disponivel'] == 0) 
-            {
-                $this->produtoFalso($id_produto);
-                return;
-            }
-        }
-        $this->produtoVerdadeiro($id_produto);
+    $indisponiveis = $stmt->fetchColumn();
+
+    // Define a disponibilidade do produto baseado nos ingredientes
+    $disponivel = ($indisponiveis == 0) ? 1 : 0;
+
+    $sqlUpdate = "
+    UPDATE Produto
+    SET Disponivel = :disponivel
+    WHERE Id_Produto = :idProduto
+    ";
+
+    $stmt = $pdo->prepare($sqlUpdate);
+    $stmt->bindParam(':disponivel', $disponivel, PDO::PARAM_INT);
+    $stmt->bindParam(':idProduto', $id_produto, PDO::PARAM_INT);
+
+    return $stmt->execute();
     }
 
     public function produtoFalso($id_produto)
@@ -79,10 +90,13 @@ class manipulaProduto
 
     public function listaProduto()
     {
-        $sql = "SELECT Nome, Descricao, Preco FROM Produto";
+        $sql = "SELECT p.Nome, p.Descricao, p.Preco, p.Id_Produto, c.NOME AS Categoria
+        FROM Produto p
+        INNER JOIN Categoria c ON p.Id_Categoria = c.ID_CATEGORIA";
         $stmt = $this->conexao->conectar()->query($sql);
         return $stmt->fetchAll();
     }
+
 
     public function atualizaProduto($id, $nome, $preco)
     {
