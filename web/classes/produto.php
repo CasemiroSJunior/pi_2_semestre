@@ -30,7 +30,7 @@ class Produto
     //Método que retorna os produtos por categoria
     public function obterProdutoPorCategoria($categoriaid) 
     {
-        $sql = "select nome, descricao, preco from produto where id_categoria = :categoriaid and disponivel = 1";
+        $sql = "select nome, coalesce(descricao,'') as descricao, preco from produto where id_categoria = :categoriaid and (disponivel = 1 or descricao is null)";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindparam(':categoriaid', $categoriaid); 
         $stmt->execute();
