@@ -40,8 +40,8 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GerarRelatorioVendasPorEntregador` ()   BEGIN
     SELECT 
         e.Nome AS Nome_Entregador,
-        COALESCE(COUNT(pi.Id_Item_Pedido), 0) AS Total_Vendas,  -- Conta o número total de itens pedidos, retornando 0 se não houver
-        COALESCE(SUM(pi.Quantidade * pi.ValorUnitario), 0) AS Valor_Total  -- Soma do valor total, retornando 0 se não houver
+        COALESCE(COUNT(pi.Id_Item_Pedido), 0) AS Total_Vendas,  
+        COALESCE(SUM(pi.Quantidade * pi.ValorUnitario), 0) AS Valor_Total  
     FROM 
         Entregador e
     LEFT JOIN 
@@ -172,7 +172,6 @@ INSERT INTO `ingrediente` (`Id_ingrediente`, `Nome`, `Disponivel`) VALUES
 DELIMITER $$
 CREATE TRIGGER `AtualizaStatusProdutoUpdate` AFTER UPDATE ON `ingrediente` FOR EACH ROW BEGIN
     IF OLD.Disponivel != NEW.Disponivel THEN
-        -- Atualiza o status do produto que usa o ingrediente para refletir o novo status
         UPDATE produto
         SET Disponivel = NEW.Disponivel
         WHERE Id_Produto IN (
@@ -327,17 +326,14 @@ $$
 DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `AtualizaStatusProduto` AFTER INSERT ON `produto_ingrediente` FOR EACH ROW BEGIN
-    -- Verifica se algum ingrediente associado ao produto tem Disponivel = 0
     DECLARE produto_disponivel TINYINT(1);
 
-    -- Verifica se algum ingrediente do produto é indisponível (Disponivel = 0)
     SELECT IF(COUNT(*) > 0, 0, 1)
     INTO produto_disponivel
     FROM produto_ingrediente pi
     JOIN ingrediente i ON pi.Id_Ingrediente = i.Id_Ingrediente
     WHERE pi.Id_Produto = NEW.Id_Produto AND i.Disponivel = 0;
 
-    -- Atualiza o campo Disponivel do produto
     UPDATE produto
     SET Disponivel = produto_disponivel
     WHERE Id_Produto = NEW.Id_Produto;

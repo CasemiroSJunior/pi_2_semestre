@@ -22,7 +22,7 @@ class manipulaProduto
         $stmt->bindParam(':preco', $preco);
         $stmt->bindParam(':disponivel', $disponivel);
         $stmt->bindParam(':categoria', $categoria);
-
+        
         if ($stmt->execute()) {
             //A função lastInsertId, de acordo com a documentação do PHP, tem como objetivo retornar o valor da última linha inserida.
             //Estava com problemas na hora de tentar cadastrar utilizando o auto-incrementy do banco.
@@ -36,18 +36,21 @@ class manipulaProduto
     {
         try 
         {
-            $sql = "INSERT INTO produto_ingrediente (id_produto, id_ingrediente) VALUES (:id_produto, :id_ingrediente)";
+            $sql = "insert into produto_ingrediente (id_produto, id_ingrediente) values (:id_produto, :id_ingrediente)";
             $stmt = $this->conexao->conectar()->prepare($sql);
             $stmt->bindParam(':id_produto', $id_produto);
             $stmt->bindParam(':id_ingrediente', $id_ingrediente);
             $stmt->execute();
+            return true;
         } 
-        catch (PDOException $e) 
+        catch(PDOException $e) 
         {
-            echo "<script>alert('Erro ao adicionar ingrediente')</script>";
+            if ($e->getCode() == '45000') 
+            {
+                return false; 
+            }
         }
     }
-
 
     public function listaProduto()
     {
@@ -74,7 +77,8 @@ class manipulaProduto
         $sql = "delete from produto where id_produto = :id";
         $stmt = $this->conexao->conectar()->prepare($sql);
         $stmt->bindParam(':id', $id);
-
-        return $stmt->execute();
+        
+        return $stmt->execute(); 
     }
 }
+?>
