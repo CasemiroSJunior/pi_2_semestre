@@ -1,0 +1,16 @@
+@startuml
+actor Usuario
+participant "Sistema" as Sistema
+participant "API WhatsApp" as WhatsApp
+
+Usuario -> Sistema: Inserir nome completo
+Usuario -> Sistema: Inserir endereço
+Usuario -> Sistema: Inserir telefone
+Usuario -> Sistema: Escolher forma de pagamento
+Usuario -> Sistema: Confirmar compra
+
+Sistema -> WhatsApp: Enviar dados do produto e informações do usuário
+WhatsApp --> Sistema: Confirmação de envio
+
+Sistema -> Usuario: Exibir Tela para enviar pedido
+@enduml
