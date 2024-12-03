@@ -33,15 +33,16 @@ class manipulaProduto
     }
 
     public function adicionaIngredienteProduto($id_produto, $id_ingrediente){
-         $sql = "insert into produto_ingrediente (id_produto, id_ingrediente) values (:id_produto, :id_ingrediente)";
-     try{
-         $stmt = $this->conexao->conectar()->prepare($sql);
-         $stmt->bindParam(':id_produto', $id_produto);
-         $stmt->bindParam(':id_ingrediente', $id_ingrediente);
-         return $stmt->execute();
-     }catch (Exception $e) {
-         echo '<script>alert("Ingrediente já cadastrado")</script>';
-     }
+        try {
+            $sql = "insert into produto_ingrediente (id_produto, id_ingrediente) values (:id_produto, :id_ingrediente)";
+            $stmt = $this->conexao->conectar()->prepare($sql);
+            $stmt->bindParam(':id_produto', $id_produto);
+            $stmt->bindParam(':id_ingrediente', $id_ingrediente);
+            return $stmt->execute();
+        } catch (Exception $e) {
+            echo '<script>alert("Ingrediente já cadastrado")</script>';
+        }
+    }
 
     public function listaProduto()
     {
