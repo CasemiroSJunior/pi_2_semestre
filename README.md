@@ -12,7 +12,7 @@ Desenvolvemos um sistema completo para a gestão de uma pizzaria. O administrado
 | Orientador | Disciplina |
 | ------ | ------ |
 | [Orlando Saraiva do Nascimento Junior](https://br.linkedin.com/in/orlando-saraiva-j%C3%BAnior-83707022) | Desenvolvimento Web II|
-| [Leonardo de Souza Lima](https://www.linkedin.com/in/prof%C2%BA-nilton-a6355126/) | Banco de Dados - Relacional |
+| [Nilton Cesar Sacco](https://www.linkedin.com/in/prof%C2%BA-nilton-a6355126/) | Banco de Dados - Relacional |
 | [Bruno Henrique de Paula Ferreira](https://br.linkedin.com/in/bruno-henrique-de-paula-ferreira-27153939) | Engenharia de Software II|
 
 ## Integrantes
@@ -25,3 +25,4 @@ Desenvolvemos um sistema completo para a gestão de uma pizzaria. O administrado
 
 ## Lista de Projetos Integradores
 Todos os Projetos integradores feitos pela Fatec Araras podem ser acessados [clicando aqui](https://github.com/orlandosaraivajr/PI_FATEC_ARARAS). Nele é possível encontrar sobre grupos anteriores, temas e as lives de apresentação dos projetos.
+
