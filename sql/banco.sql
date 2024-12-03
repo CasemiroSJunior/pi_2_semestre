@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 03/12/2024 às 00:44
+-- Tempo de geração: 03/12/2024 às 15:29
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -161,9 +161,9 @@ CREATE TABLE `ingrediente` (
 --
 
 INSERT INTO `ingrediente` (`Id_ingrediente`, `Nome`, `Disponivel`) VALUES
-(7, 'Farinha', 1),
+(7, 'Farinha', 0),
 (8, 'Tomate', 1),
-(9, 'Cebola', 0),
+(9, 'Cebola', 1),
 (10, 'Calabresa', 1);
 
 --
@@ -271,7 +271,7 @@ CREATE TABLE `produto` (
 --
 
 INSERT INTO `produto` (`Id_Produto`, `Nome`, `DataCriacao`, `Preco`, `Descricao`, `Disponivel`, `Id_Categoria`) VALUES
-(8, 'Pizza Calabresa', '2024-12-02', 40.00, 'Farinha, Tomate, Cebola, Calabresa', 0, 1);
+(12, 'sei la', '2024-12-03', 12.00, 'Farinha', 0, 3);
 
 -- --------------------------------------------------------
 
@@ -290,10 +290,7 @@ CREATE TABLE `produto_ingrediente` (
 --
 
 INSERT INTO `produto_ingrediente` (`Id_produto`, `Id_ingrediente`, `Disponivel`) VALUES
-(8, 7, 1),
-(8, 8, 1),
-(8, 9, 1),
-(8, 10, 1);
+(12, 7, 1);
 
 --
 -- Acionadores `produto_ingrediente`
@@ -344,6 +341,21 @@ CREATE TRIGGER `AtualizaStatusProduto` AFTER INSERT ON `produto_ingrediente` FOR
     UPDATE produto
     SET Disponivel = produto_disponivel
     WHERE Id_Produto = NEW.Id_Produto;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `VerificarDuplicidade` BEFORE INSERT ON `produto_ingrediente` FOR EACH ROW BEGIN
+    DECLARE duplicado INT;
+    
+    SELECT COUNT(*) INTO duplicado
+    FROM produto_ingrediente
+    WHERE id_produto = NEW.id_produto AND id_ingrediente = NEW.id_ingrediente;
+    
+    IF duplicado > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Essa combinação de produto e ingrediente já existe.';
+    END IF;
 END
 $$
 DELIMITER ;
@@ -485,7 +497,7 @@ ALTER TABLE `pedido_item`
 -- AUTO_INCREMENT de tabela `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `Id_Produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Id_Produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
